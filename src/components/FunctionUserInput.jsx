@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 
-const FunctionUserInput = ({type, name, initialValue}) => {
+const FunctionUserInput = ({inputId, type, name, initialValue, onChange}) => {
     const inpRef = useRef();
 
     const resizeInput = () => {
@@ -14,6 +14,11 @@ const FunctionUserInput = ({type, name, initialValue}) => {
 
     const changeRef = (r) => {
         inpRef.current = r;
+    }
+
+    const onInputChange = (e) => {
+        resizeInput();
+        onChange(e, e.target.value, inputId);
     }
 
     useEffect(() => {
@@ -28,7 +33,7 @@ const FunctionUserInput = ({type, name, initialValue}) => {
         autoCorrect="off"
         autoCapitalize="off"
         spellCheck="false"
-        onChange={resizeInput}
+        onChange={onInputChange}
         userinputtype={type}
         type="text"
         className={`function-input ${type}`}

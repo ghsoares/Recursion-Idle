@@ -10,9 +10,7 @@ const ShopContainer = () => {
             increaseCosts,
             memory
         },
-        addLoopSpeed,
-        setCost,
-        setMemory
+        setGameState
     } = useContext(GameContext);
 
     const [buyQuantity, setBuyQuantity] = useState(1);
@@ -27,15 +25,27 @@ const ShopContainer = () => {
     }
 
     const purchaseLoopSpeed = () => {
-        addLoopSpeed(purchaseAdd["loopSpeed"].mul(buyQuantity));
         const newCost = increaseCosts["loopSpeed"](costs["loopSpeed"].mul(buyQuantity));
-        setCost("loopSpeed", newCost);
+        setGameState(prevGameState => ({
+            ...prevGameState,
+            costs: {
+                ...prevGameState.costs,
+                "loopSpeed": newCost
+            },
+            loopSpeed: prevGameState.loopSpeed.add(purchaseAdd["loopSpeed"].mul(buyQuantity))
+        }));
     }
 
     const purchaseMemory = () => {
-        setMemory(memory.add(purchaseAdd["memory"].mul(buyQuantity)));
         const newCost = increaseCosts["memory"](costs["memory"].mul(buyQuantity));
-        setCost("memory", newCost);
+        setGameState(prevGameState => ({
+            ...prevGameState,
+            costs: {
+                ...prevGameState.costs,
+                "memory": newCost
+            },
+            memory: prevGameState.memory.add(purchaseAdd["memory"].mul(buyQuantity))
+        }));
     }
 
     return (

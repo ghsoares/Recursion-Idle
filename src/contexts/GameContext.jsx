@@ -1,17 +1,10 @@
 import React, {createContext, useState} from 'react';
-import BigNumber from 'bignumber.js';
 import Interpreter from '../tokenizer/Interpreter';
 import Decimal from 'decimal.js';
 
 export const GameContext = createContext();
 
 const GameProvider = ({children}) => {
-    /*BigNumber.config({
-        DECIMAL_PLACES: 4,
-        EXPONENTIAL_AT: 16,
-        ROUNDING_MODE: BigNumber.ROUND_HALF_UP
-    });*/
-
     Decimal.set({
         toExpPos: 9,
         toExpNeg: -9,
@@ -22,10 +15,8 @@ const GameProvider = ({children}) => {
         variablePoints: new Decimal(0.0),
         loopSpeed: new Decimal(1.0),
         memory: new Decimal(1),
-        usedMemory: new Decimal(1),
-        speedAdd: new Decimal(0.025),
         purchaseAdd: {
-            "loopSpeed": new Decimal(0.025),
+            "loopSpeed": new Decimal(0.1),
             "memory": new Decimal(1)
         },
         costs: {
@@ -42,84 +33,39 @@ const GameProvider = ({children}) => {
         startVariable: new Decimal(1.0),
         functions: {
             "myFunction1": {
-                "currentInputs": ["*", "1"],
-                "precompiled": "return x@$o1@$v2;",
-                "compiled": function(x, Decimal) {
-                    return x.mul(new Decimal(1));
-                }
+                "functionName": "myFunction1",
+                "functionString": "return x@$o1@$v2;",
+                "precompiledState": {
+                    "inputs": ["*", "1"],
+                    "errors": []
+                },
+                "compiledState": {
+                    "inputs": ["*", "1"],
+                    "function": function(x, Decimal) {
+                        return x.mul(new Decimal(1));
+                    },
+                    "cost": new Decimal(1)
+                },
+                "compiling": false
             },
-        }
+        },
     });
 
-    const addVariablePoints = (addPoints) => {
-        setGameState(prevGameState => ({
-            ...prevGameState,
-            variablePoints: prevGameState.variablePoints.add(addPoints)
-        }));
-    }
-
-    const addLoopSpeed = (addSpeed) => {
-        setGameState(prevGameState => ({
-            ...prevGameState,
-            loopSpeed: prevGameState.loopSpeed.add(addSpeed)
-        }));
-    }
-
-    const setCost = (costName, newCost) => {
-        setGameState(prevGameState => {
-            let costs = {...prevGameState.costs};
-            costs[costName] = newCost;
-            return {
-                ...prevGameState,
-                costs: costs
-            }
+    const calculateUsedMemory = () => {
+        let cost = new Decimal(0);
+        Object.keys(gameState.functions).forEach(fName => {
+            cost = cost.add(gameState.functions[fName]["compiledState"]["cost"]);
         });
-    }
-
-    const setFunction = (functionName, callback = (prevFunction) => prevFunction) => {
-        setGameState(prevGameState => {
-            let functions = {...prevGameState.functions};
-            let prev = functions[functionName];
-            if (!prev) {
-                prev = {
-                    "currentInputs": [],
-                    "precompiled": "return@x;",
-                    "compiled": function(x, Decimal) {return x;}
-                };
-            }
-
-            functions[functionName] = callback(prev);
-
-            return {
-                ...prevGameState,
-                functions
-            }
-        });
-    }
-
-    const setUsedMemory = (newUsedMemory) => {
-        setGameState(prevGameState => ({
-            ...prevGameState,
-            usedMemory: newUsedMemory
-        }));
-    }
-
-    const setMemory = (newMemory) => {
-        setGameState(prevGameState => ({
-            ...prevGameState,
-            memory: newMemory
-        }));
+        return cost;
     }
 
     return (
         <GameContext.Provider value={{
             gameState,
-            addVariablePoints,
-            addLoopSpeed,
-            setCost,
-            setFunction,
-            setUsedMemory,
-            setMemory
+            setGameState,
+            helperFunctions: {
+                calculateUsedMemory
+            }
         }}>
             {children}
         </GameContext.Provider>

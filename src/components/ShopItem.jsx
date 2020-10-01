@@ -6,7 +6,7 @@ import { edp } from '../extensionMethods/DecimalNumberExtensions';
 const ShopItem = ({ children, cost, quantity, onPurchase, payMethod }) => {
     const {
         gameState,
-        addVariablePoints
+        setGameState
     } = useContext(GameContext);
 
     let disabled = true;
@@ -17,12 +17,17 @@ const ShopItem = ({ children, cost, quantity, onPurchase, payMethod }) => {
         disabled = false;
     }
 
+    const onThisPurchase = () => {
+        setGameState(prevGameState => {
+            prevGameState[payMethod] = prevGameState[payMethod].minus(cost.mul(quantity));
+            return prevGameState
+        });
+        onPurchase();
+    }
+
     return (
         <div className="shop-item">
-            <button onClick={() => {
-                addVariablePoints(cost.mul(quantity).mul(-1.0));
-                onPurchase();
-            }} disabled={disabled}>{children}</button>
+            <button onClick={onThisPurchase} disabled={disabled}>{children}</button>
             <span className="cost">Cost: {cost.mul(quantity).toString()} {gameState.shortNames[payMethod]} (x{quantity})</span>
         </div>
     );

@@ -28,10 +28,7 @@ const Game = () => {
             <h3 className="loop-speed-display">
                 Loop Speed: <span>{loopSpeed.mul(100).toDP(1).toString()}%</span>
             </h3>
-            <UsedMemory
-                memory={memory}
-                usedMemory={usedMemory}
-            />
+            <UsedMemory/>
 
             <div className="center-tabs">
                 <FunctionsContainer></FunctionsContainer>
