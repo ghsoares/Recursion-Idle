@@ -5,9 +5,9 @@ const ShowVariablePoints = () => {
     const variablePoints = useSelector (state => state.variablePoints);
 
     return (
-        <h3 className="display-variable-points">
-            Variable Points: {variablePoints.toString()}
-        </h3>
+        <h2 className="display-variable-points">
+            Variable Points: <span>{variablePoints.toDP(0).toString()}</span>
+        </h2>
     );
 }
 

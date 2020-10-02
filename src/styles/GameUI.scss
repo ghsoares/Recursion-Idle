@@ -1,0 +1,74 @@
+@import "./default.scss";
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+.app {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: rgb(19, 25, 37);
+}
+
+.display-variable-points {
+    font-size: 32px;
+    font-weight: 600;
+    >span {
+        color: #88fbff;
+    }
+}
+
+.display-loop-speed {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 16px;
+    >span {
+        color: #889aff;
+    }
+}
+
+.game-tabs {
+    flex: 1;
+    margin-top: 32px;
+    display: flex;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 10px;
+    >.game-tab {
+        flex: 1;
+        >.game-tab-header {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+    }
+    >hr {
+        height: 100%;
+        margin: 0 16px;
+    }
+}
+
+.functions {
+    >.function-item {
+        font-size: 20px;
+        background-color: #282A36;
+        border-radius: 8px;
+        padding: 16px;
+        >.function {
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 600;
+            background-color: #343746;
+            border-radius: 8px;
+            padding: 10px;
+            >.function-header {
+                >span {
+                    color: #3fe476;
+                }
+            }
+            >.function-body {
+                margin-left: 16px;
+            }
+        }
+    }
+}

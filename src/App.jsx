@@ -1,9 +1,9 @@
-import React from 'react';
-import {Provider} from 'react-redux'
-import GameUI from './components/GameUI';
-import GameStateStore from './gameState/GameStateStore';
-import './config/ConfigDecimal';
-import GameLoop from './components/GameLoop';
+import React from "react";
+import { Provider } from "react-redux";
+import GameUI from "./components/GameUI";
+import GameLoop from "./components/GameLoop";
+import "./config/ConfigDecimal";
+import GameStateStore from "./gameState/GameStateStore";
 
 const App = () => {
   return (
@@ -14,6 +14,6 @@ const App = () => {
       </div>
     </Provider>
   );
-}
+};
 
 export default App;
