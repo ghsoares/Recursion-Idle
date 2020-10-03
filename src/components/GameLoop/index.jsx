@@ -48,6 +48,7 @@ const GameLoop = () => {
       setTimeout(timeoutHandler, gameStateRef.current.loopDelta);
     };
     setTimeout(timeoutHandler, gameStateRef.current.loopDelta);
+  // eslint-disable-next-line
   }, []);
 
   return null;

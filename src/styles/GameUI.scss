@@ -52,23 +52,80 @@
 .functions {
     >.function-item {
         font-size: 20px;
-        background-color: #282A36;
+        background-color:#44475A;
         border-radius: 8px;
         padding: 16px;
         >.function {
             font-family: 'Source Code Pro', monospace;
             font-weight: 600;
-            background-color: #343746;
+            background-color: #282A36;
             border-radius: 8px;
             padding: 10px;
             >.function-header {
+                opacity: 0.75;
+                user-select: none;
+                display: inline-flex;
+                align-items: center;
                 >span {
                     color: #3fe476;
+                    margin-left: 16px;
+                }
+                >.collapse-function {
+                    background: none;
+                    border: none;
+                    margin: 0;
+                    padding: 0;
+                    color: white;
+                    outline: none;
+                    font-size: 18px;
+                    margin-right: 8px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
             >.function-body {
-                margin-left: 16px;
+                display: inline-box;
+                width: 100%;
+                .function-editor {
+                    box-sizing: border-box;
+                }
+                .ace_hidden-cursors {
+                    opacity:0
+                }
+            }
+            >.function-footer {
+                opacity: 0.75;
+                user-select: none;
+                display: inline;
             }
         }
+        >.function-errors {
+            margin-top: 16px;
+            >.top {
+                display: flex;
+                justify-content: space-between;
+                >.error-close {
+                    font-size: 12px;
+                    background-color: #ff6565;
+                    color: #250707;
+                }
+            }
+            >.error-info {
+                border-radius: 4px;
+                font-size: 14px;
+                margin-top: 16px;
+                padding: 8px 12px;
+                background-color: #ff6565;
+                color: #250707;
+            }
+        }
+        >.function-compile {
+            margin-top: 16px;
+            background-color: #7af3a2;
+            color: #0c2925;
+        }
+        
     }
 }

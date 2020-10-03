@@ -4,7 +4,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 const INITIAL_GAME_STATE = {
     variablePoints: new Decimal(0),
-    memoryPoints: new Decimal(1.0),
     operationsPerSecond: new Decimal(1.0),
     loopDelta: new Decimal(1000.0),
     variables: [
@@ -12,8 +11,8 @@ const INITIAL_GAME_STATE = {
     ],
     functions: [{
         name: "myFunction1",
-        pattern: "return $variable $operation $variable;",
-        inputs: ["x", "*", "1.0"],
+        sourceCode: "return x * 1;",
+        virtualMemory: new Decimal(1.0),
         func: function(x, Decimal) {
             return x.mul(new Decimal(1.0));
         }
