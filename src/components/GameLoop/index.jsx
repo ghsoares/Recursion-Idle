@@ -1,7 +1,7 @@
 import Decimal from "decimal.js";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementVariablePointsAction as addVariablePointsAct } from "../../gameState/Actions";
+import { incrementVariablePointsAction as addVariablePointsAct } from "../../game state/Actions";
 
 const GameLoop = () => {
   const gameState = useSelector((state) => {

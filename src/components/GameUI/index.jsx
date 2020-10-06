@@ -3,6 +3,7 @@ import ShowSpeed from './ShowSpeed';
 import ShowVariablePoints from './ShowVariablePoints';
 import "../../styles/GameUI.scss";
 import FunctionContainer from './FunctionContainer';
+import ShopContainer from './ShopContainer';
 
 const GameUI = () => {
     return (
@@ -10,9 +11,9 @@ const GameUI = () => {
             <ShowVariablePoints />
             <ShowSpeed />
             <div className="game-tabs">
-                <FunctionContainer className="game-tab functions"/>
+                <FunctionContainer/>
                 <hr/>
-                <FunctionContainer className="game-tab functions"/>
+                <ShopContainer/>
             </div>
         </>
     );

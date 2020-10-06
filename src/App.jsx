@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import GameUI from "./components/GameUI";
 import GameLoop from "./components/GameLoop";
 import "./config/ConfigDecimal";
-import GameStateStore from "./gameState/GameStateStore";
+import GameStateStore from "./game state/GameStateStore";
 
 const App = () => {
   return (

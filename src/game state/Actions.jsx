@@ -15,3 +15,13 @@ export const increaseLoopSpeedAction = (amount) => {
         }
     }
 }
+
+export const shopPurchaseAction = (itemName, qtd) => {
+    return {
+        type: "shopPurchase",
+        payload: {
+            itemName,
+            qtd
+        }
+    }
+}
